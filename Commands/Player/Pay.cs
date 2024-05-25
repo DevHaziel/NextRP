@@ -18,6 +18,10 @@ namespace NextRP.Commands.Player
                 player.svPlayer.SendGameMessage("&4[Err] &fYou don't have enoght money in your bank.");
                 return;
             }
+            if(count < 1)
+            {
+                player.svPlayer.SendGameMessage("&4[Err] &fYou cant transfer a negative or zero number.");
+            }
 
             player.svPlayer.bankBalance -= count;
             target.svPlayer.bankBalance += count;

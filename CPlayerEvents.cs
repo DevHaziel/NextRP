@@ -18,7 +18,6 @@ namespace NextRP
         public void CloseIdentityForm(ShPlayer player, string element)
         {
             player.svPlayer.VisualElementDisplay("ContainerIdentityForm", false);
-            player.svPlayer.CursorVisibility(false);
         }
 
         [CustomTarget]
@@ -42,9 +41,10 @@ namespace NextRP
             temporaryData[player.username] = new IdentityDocument();
 
             foreach (var field in new string[] { "name", "lastname", "age" }) player.svPlayer.GetTextFieldText(field, "OnIdentityRegisterGetField");
+           
             player.svPlayer.GetDropdownFieldValue("gender", "OnIdentityRegisterGetDropdown");
             player.svPlayer.VisualElementDisplay("ContainerIdentityForm", false);
-            Debug.Log(temporaryData[player.username]);
+            player.svPlayer.CursorVisibility(false);
             player.svPlayer.StartCoroutine(CheckSubmit(player));
         }
 
@@ -88,8 +88,6 @@ namespace NextRP
             switch (element)
             {
                 case "gender":
-                    player.svPlayer.SendGameMessage($"Index: {index}");
-
                     temporaryData[player.username].Sex = sexDropdown[index];
                     break;
             }
